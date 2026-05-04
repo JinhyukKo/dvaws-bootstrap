@@ -18,6 +18,18 @@ variable "account_id_cicd" {
   type        = string
 }
 
+variable "vpc_id" {
+  description = "VPC ID for creating VPC endpoints (optional, for private access)."
+  type        = string
+  default     = ""
+}
+
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs for DynamoDB interface endpoint (optional)."
+  type        = list(string)
+  default     = []
+}
+
 variable "tags" {
   description = "Common tags to apply to all bootstrap resources."
   type        = map(string)

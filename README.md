@@ -4,6 +4,8 @@ This project creates shared Terraform remote state infrastructure:
 
 - S3 bucket for remote state files
 - DynamoDB table for state locking
+- IAM role for CI/CD account access
+- VPC endpoints for private access (optional)
 
 ## Usage
 
@@ -36,3 +38,5 @@ This project creates shared Terraform remote state infrastructure:
 - Do not configure an S3 backend in this bootstrap stack until after first apply.
 - Keep this stack simple and stable; all other stacks depend on it.
 # dvaws-bootstrap
+
+
