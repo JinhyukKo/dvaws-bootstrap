@@ -13,12 +13,13 @@ variable "lock_table_name" {
   type        = string
 }
 
+variable "account_id_cicd" {
+  description = "AWS account ID for the CI/CD account that can assume the Terraform state role."
+  type        = string
+}
+
 variable "tags" {
   description = "Common tags to apply to all bootstrap resources."
   type        = map(string)
   default     = {}
-}
-variable "account_id_cicd" {
-  description = "Account ID for the CI/CD pipeline."
-  type        = string
 }

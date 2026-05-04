@@ -14,3 +14,45 @@ resource "aws_iam_role" "terraform_state_role" {
     ]
   })
 }
+
+resource "aws_iam_role_policy" "terraform_state_role_policy" {
+  name = "TerraformStateAccessPolicy"
+  role = aws_iam_role.terraform_state_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetBucketLocation",
+          "s3:ListBucket",
+          "s3:ListBucketVersions",
+          "s3:ListBucketMultipartUploads",
+          "s3:GetObject",
+          "s3:GetObjectVersion",
+          "s3:PutObject",
+          "s3:DeleteObject",
+          "s3:AbortMultipartUpload"
+        ]
+        Resource = [
+          aws_s3_bucket.tf_state.arn,
+          "${aws_s3_bucket.tf_state.arn}/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:DescribeTable",
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:Query",
+          "dynamodb:Scan"
+        ]
+        Resource = aws_dynamodb_table.tf_lock.arn
+      }
+    ]
+  })
+}
