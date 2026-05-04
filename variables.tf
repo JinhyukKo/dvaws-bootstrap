@@ -18,3 +18,7 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+variable "account_id_cicd" {
+  description = "Account ID for the CI/CD pipeline."
+  type        = string
+}

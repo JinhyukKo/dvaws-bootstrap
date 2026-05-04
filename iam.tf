@@ -7,7 +7,7 @@ resource "aws_iam_role" "terraform_state_role" {
       {
         Effect = "Allow"
         Principal = {
-          AWS = "arn:aws:iam::SOURCE_ACCOUNT_ID:root"
+          AWS = "arn:aws:iam::${var.account_id_cicd}:root" # jinhyukcicd account ID
         }
         Action = "sts:AssumeRole"
       }
